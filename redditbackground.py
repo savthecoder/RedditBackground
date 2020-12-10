@@ -32,8 +32,7 @@ def getTopImagePostsFromSubreddit(subredditName):
 
 def storeImageInStoredBackgroundsFolder(image):
 	createStoredBackgroundsFolderIfNotExists()
-	imageSuffix = int(round(time.time() * 1000))
-	imageFilename = "bg_" + str(imageSuffix) + ".jpg"
+	imageFilename = "bg_" + image["title"] + ".jpg"
 	open("stored_backgrounds/" + imageFilename, "wb").write(urllib.request.urlopen(image["url"]).read())
 	return imageFilename
 
