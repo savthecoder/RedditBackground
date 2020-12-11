@@ -15,7 +15,7 @@ while True :
         print("Title: " + image["title"])
         exit()
     else:
-        print("Error wrong input !!!\nDo you wanna 'continue' or 'exit'")
+        print("Error wrong input !!!\n######### Do you wanna 'continue' or 'exit' #########")
         save = input()
         if save == "exit" :
             exit()
