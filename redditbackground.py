@@ -5,10 +5,10 @@ import ctypes
 import time
 import os
 
-def setBackgroundFromSubreddit(subredditName):
+def setBackgroundFromSubreddit(subredditName,save):
 	topImagePost = getTopImageFromSubreddit(subredditName)
 	imageFilename = storeImageInStoredBackgroundsFolder(topImagePost)
-	setImageAsBackground(imageFilename)
+	setImageAsBackground(imageFilename,save)
 	return topImagePost
 
 def getTopImageFromSubreddit(subredditName):
@@ -39,8 +39,12 @@ def createStoredBackgroundsFolderIfNotExists():
 	if not os.path.exists("stored_backgrounds"):
 		os.makedirs("stored_backgrounds")
 
-def setImageAsBackground(imageFilename):
+def setImageAsBackground(imageFilename,save):
 	ctypes.windll.user32.SystemParametersInfoW(20, 0, getFullPathOfImage(imageFilename) , 0)
+	if save == "n":
+		time.sleep(3)
+		os.remove(getFullPathOfImage(imageFilename))
 
 def getFullPathOfImage(imageFilename):
 	return os.path.dirname(os.path.realpath("stored_backgrounds/" + imageFilename)) + "\\" + imageFilename
+
